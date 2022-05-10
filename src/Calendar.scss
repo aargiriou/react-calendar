@@ -1,0 +1,29 @@
+.calendar {
+  position: relative;
+  color: var(--primary-900);
+  background-color: var(--white);
+  height: 100%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .calendar-header {
+    display: grid;
+    grid-template-columns: 50px 50px auto 50px 50px;
+    align-items: center;
+    font-size: 1.6em;
+    margin: 8px 0;
+  }
+
+  .header-selected-month {
+    flex: 1;
+  }
+
+  .day-of-week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    color: var(--primary-500);
+    font-size: 18px;
+  }
+}
