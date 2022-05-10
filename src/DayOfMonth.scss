@@ -1,0 +1,50 @@
+.day-of-month-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: inherit;
+  transition: all 0.3s;
+  transition-property: color, background-color, opacity, visibility;
+  // For Not current months
+  pointer-events: none;
+  
+  .is-current & {
+    pointer-events: auto;
+
+    &:hover {
+      background-color: var(--secondary-050);
+      color: var(--secondary-500);
+      cursor: pointer;
+    }
+  }
+}
+
+.visible {
+  position: relative;
+  visibility: visible;
+  opacity: 1;
+}
+
+.invisible {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.day-of-month {
+  width: calc(var(--spacing) / 2);
+  height: calc(var(--spacing) / 2);
+  padding: calc(var(--spacing) / 2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.day-of-month-text {
+  .is-today & {
+    color: var(--white);
+    border-radius: 50%;
+    background-color: var(--primary-800);
+  }
+}
