@@ -1,0 +1,10 @@
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(52px, 1fr));
+  gap: 2px;
+  height: 100%;
+  position: relative;
+  border: solid 2px var(--primary-100);
+  background-color: var(--primary-100);
+  margin: 4px 0;
+}
