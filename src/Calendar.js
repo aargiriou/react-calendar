@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import moment from 'moment';
+import { useSwipeable } from 'react-swipeable';
+import classNames from 'classnames';
 import './Calendar.scss';
 
 import { WEEKDAYS, MONTH_FORMAT, YEAR_FORMAT } from './helpers/constants';
@@ -15,8 +17,18 @@ export default function Calendar({
   const [monthSelected, setMonthSelected] = useState({
     date: initialMonthDate
   });
+  const [isSwiping, setIsSwiping] = useState(false);
+  const handlers = useSwipeable({
+    onSwipedLeft: handleClickNextMonth,
+    onSwipedRight: handleClickPreviousMonth,
+    onSwipeStart: () => setIsSwiping(true),
+    onSwiped: () => setIsSwiping(false),
+    onTouchEndOrOnMouseUp: () => setIsSwiping(false),
+    swipeDuration: 500,
+    preventScrollOnSwipe: true,
+    trackMouse: true
+  });
 
-  console.log(monthSelected.date.toString());
   function handleClickPreviousMonth() {
     setMonthSelected((prevState) => ({
       date: prevState.date.clone().subtract(1, 'month')
@@ -67,10 +79,17 @@ export default function Calendar({
         ))}
       </section>
 
-      <CalendarDays
-        month={monthSelected.date.format(MONTH_FORMAT)}
-        year={monthSelected.date.format(YEAR_FORMAT)}
-      />
+      <section
+        className={classNames('calendar-days-wrapper', {
+          'is-swiping': isSwiping
+        })}
+        {...handlers}
+      >
+        <CalendarDays
+          month={monthSelected.date.format(MONTH_FORMAT)}
+          year={monthSelected.date.format(YEAR_FORMAT)}
+        />
+      </section>
     </article>
   );
 }
